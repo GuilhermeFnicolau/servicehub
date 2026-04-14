@@ -1,6 +1,22 @@
-<?php
+<?php 
+require_once "config/conexao.php";
+$pdo = obterPdo();
+
+$cmd = $pdo->prepare("SELECT * FROM servicos WHERE descontinuado=b'0'");
+$cmd->execute();
+$servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT nome FROM usuarios where tipo = 2 and ativo = 1 order by id asc limit 4;";
+$cmd = $pdo->prepare($sql);
+$cmd->execute();
+$clientes = $cmd->fetchAll(PDO::FETCH_ASSOC);
+
+
 include "includes/header.php";
 include "includes/menu.php";
+
+
+
 ?>
 
 
@@ -104,4 +120,6 @@ include "includes/menu.php";
   </div>
 
 </main>
-
+<?php 
+include "includes/footer.php";
+?>
