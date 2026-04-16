@@ -1,7 +1,15 @@
 <?php
+
 session_start(); //iniciar a sessão ou atualizar uma sessão aberta
+
+//Evita acesso se já estiver logado
+if(isset($_SESSION['usuario_id'])){
+  $destino = ($_SESSION['tipo'] == 1)?"admin_dashboard.php":"cliente_dashboard.php"; //estrutura do if ternário
+  header("location: $destino");
+}
+
 require "class/Usuario.php";
-//var_dump($user->efetuarLogin('admin@servicehub.com', 'admin123'));
+
 $msg = "";
 if($_SERVER['REQUEST_METHOD']==="POST"){
     $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
