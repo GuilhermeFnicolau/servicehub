@@ -1,7 +1,7 @@
 <?php 
 include_once "config/conexao.php";
 
-class Servico {
+class Servico{
 
     private $id;
     private $nome;
